@@ -1,4 +1,7 @@
-function createFrame(number) {
+function createCanvas(number) {
+  const parent = document.querySelector('.canvasOfGame');
+  parent.innerHTML = '';
+
   for (let i = 0; i < number; i++) {
     const div = document.createElement('div');
     div.classList.toggle('column'); 
@@ -11,22 +14,32 @@ function createFrame(number) {
       });
       div.appendChild(square);
     }
-    let container = document.querySelector('.frameOfGame');
+    let container = document.querySelector('.canvasOfGame');
     container.appendChild(div);
   }
 }
 
-createFrame(16);
+createCanvas(16);
 
 function reset() {
-  const squaresPainted = document.querySelectorAll('.hover');
-  for (let i = 0; i < squaresPainted.length; i++) {
-    squaresPainted[i].classList.toggle('hover');
+  if(confirm("are you sure?")){
+    const squaresPainted = document.querySelectorAll('.hover');
+    for (let i = 0; i < squaresPainted.length; i++) {
+      squaresPainted[i].classList.toggle('hover');
+    }
   }
 }
 
-resetButton = document.querySelector('.reset');
+function changeGridSize() {
+  let size = prompt("Enter your preferred size, it must be equal or less than 100");
+  if (size<=100 && size >=1)
+    createCanvas(size);
+  else
+    alert("You must enter a valid value");
+}
 
+const changeGrid = document.querySelector('#changeGrid');
+changeGrid.addEventListener('click', changeGridSize);
+
+const resetButton = document.querySelector('#reset');
 resetButton.addEventListener('click', reset);
-
-confirm("hola")
